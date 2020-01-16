@@ -13,5 +13,3 @@ function solve(num){
     console.log(allIsSame);
     console.log(sum);
 }
-
-solve(2222222)

@@ -1,4 +1,5 @@
 function result() {
+    return {
         add= function (vec1, vec2) {
             let xa = vec1[0];
             let ya = vec1[1];
@@ -39,6 +40,7 @@ function result() {
 
             return xa * yb - ya * xb;
         }
+    }
 }
 
 var answer = result.add([1, 1], [1, 0]);

@@ -6,7 +6,6 @@ function sort(arr,sortingCriterion){
             this.status=status;
         }
     }
-
     let tickets=[];
 
     arr.forEach(element => {
@@ -18,7 +17,6 @@ function sort(arr,sortingCriterion){
     }else{
         tickets.sort((a,b)=>a[sortingCriterion].localeCompare(b[sortingCriterion]));
     }
-    
 
     return tickets;
 }

@@ -52,27 +52,11 @@ describe('StringBuilder', () => {
             let sb = new StringBuilder('abcd');
             assert.throw(() => sb.insertAt({},10), 'Argument must be string');
         });
-        it('Should insert correctly',()=>{
-            let sb = new StringBuilder('abcd');
-            sb.insertAt('efg',1);
-            let result = sb.toString();
-            let expectedResult = 'aefgbcd';
-            assert.equal(result, expectedResult);
-        });
-
-        it('Should insert correctly',()=>{
-            let sb = new StringBuilder('abcd');
-            sb.insertAt('efg',5);
-            let result = sb.toString();
-            let expectedResult = 'abcdefg';
-            assert.equal(result, expectedResult);
-        });
-        it('Should insert correctly',()=>{
-            let sb = new StringBuilder('abcd');
-            sb.insertAt('efg',-5);
-            let result = sb.toString();
-            let expectedResult = 'efgabcd';
-            assert.equal(result, expectedResult);
+        it('test insertAt', () => {
+            let sb = new StringBuilder('ad');
+            sb.insertAt('bc', 1);
+     
+            assert.deepEqual(sb._stringArray, ['a','b', 'c', 'd']);
         });
     });
     describe('remove', () => {
@@ -98,11 +82,5 @@ describe('StringBuilder', () => {
         it('Should not throw error',()=>{
             assert.equal(StringBuilder._vrfyParam('sa'),undefined)
         });
-        it('test insert incorrect value', () => {
-            let sb = new StringBuilder()
-           
-            assert.equal(sb.toString(), '');
-        });  
     });
-
 });

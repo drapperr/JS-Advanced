@@ -1,55 +1,62 @@
 function solution() {
+    let addBtn = document.querySelector('.card div button');
+    let inputBox = document.querySelector('.card div input');
+    let listOfGifts = document.querySelectorAll('.card')[1].querySelector('ul');
+    let listOfSend = document.querySelectorAll('.card')[2].querySelector('ul');
+    let listOfDiscardeds = document.querySelectorAll('.card')[3].querySelector('ul');
 
-    const addInput = document.querySelector("body > div > section:nth-child(1) > div > input[type=text]");
-    const addButton = document.querySelector("body > div > section:nth-child(1) > div > button");
-    const ulGiftList = document.querySelector("body > div > section:nth-child(2) > ul");
-    const ulGiftSend = document.querySelector("body > div > section:nth-child(3) > ul");
-    const ulGiftDiscard = document.querySelector("body > div > section:nth-child(4) > ul");
+    addBtn.addEventListener('click', addGift);
 
-    addButton.addEventListener('click', addNewGift);
+    function addGift() {
+        let newLi = document.createElement('li');
+        newLi.classList.add('gift');
+        newLi.innerHTML = inputBox.value;
 
-    function addNewGift(){
-        const li = createNewelement('li', addInput.value);
-        const sendBtn = createNewelement('button', 'Send', 'sendButton');
-        const discardBtn = createNewelement('button', 'Discard', 'discardButton');
+        let sendBtn = document.createElement('button');
+        sendBtn.id = 'sendButton';
+        sendBtn.innerHTML = 'Send';
+        sendBtn.addEventListener('click', sendItem);
 
-        li.classList.add('gift');
+        let discardBtn = document.createElement('button');
+        discardBtn.id = 'discardButton';
+        discardBtn.innerHTML = 'Discard';
+        discardBtn.addEventListener('click', discardItem);
 
-        sendBtn.addEventListener('click', moveGift);
-        discardBtn.addEventListener('click', moveGift);
+        newLi.appendChild(sendBtn);
+        newLi.appendChild(discardBtn);
 
-        appendElements(li, [sendBtn, discardBtn]);
-        appendElements(ulGiftList, [li]);
+        listOfGifts.appendChild(newLi);
 
-        addInput.value = '';
+        sortList();
 
-        const result = Array.from(ulGiftList.children).sort((a, b) => a.innerHTML.localeCompare(b.innerHTML));
-        ulGiftList.innerHTML = '';
-        result.map(li => ulGiftList.appendChild(li));
+        inputBox.value = '';
     }
-    function moveGift(){
-        const li = this.parentNode;
-        const [btn1, btn2] = Array.from(li.children);
-        li.removeChild(btn1);
-        li.removeChild(btn2);
-        if(this.innerHTML === 'Send'){
-            ulGiftSend.appendChild(li);
-        }
-        if(this.innerHTML === 'Discard'){
-            ulGiftDiscard.appendChild(li);
-        }
+
+    function sendItem(e) {
+        let newLi = document.createElement('li');
+        newLi.classList.add('gift');
+        newLi.innerHTML = e.target.parentNode.innerHTML;
+        newLi.lastChild.remove();
+        newLi.lastChild.remove();
+        e.target.parentNode.remove();
+
+        listOfSend.append(newLi);
     }
-    function appendElements(parent, childrens){
-        childrens.map(el => parent.appendChild(el));
+
+    function discardItem(e) {
+        let newLi = document.createElement('li');
+        newLi.classList.add('gift');
+        newLi.innerHTML = e.target.parentNode.innerHTML;
+        newLi.lastChild.remove();
+        newLi.lastChild.remove();
+        e.target.parentNode.remove();
+
+        listOfDiscardeds.append(newLi);
     }
-    function createNewelement(el, text, id){
-        const element = document.createElement(el);
-        if(text){
-            element.innerHTML = text;
-        }
-        if(id){
-            element.id = id;
-        }
-        return element;
+
+    function sortList() {
+        const result = Array.from(listOfGifts.children).sort((a, b) => a.innerHTML.localeCompare(b.innerHTML));
+        listOfGifts.innerHTML = '';
+        result.map(li => listOfGifts.appendChild(li));
     }
 }

@@ -72,7 +72,7 @@ module.exports = SkiResort;
 let res = new SkiResort("Some");
 console.log(res.build("Sun", 10));
 console.log(res.build('Avenue',5))
-console.log(res.book('Sun', 5))
+console.log(res.book('Sun', 5))S
 console.log(res.book('Avenue', 5))
 console.log(res.leave('Sun', 3, 2));
 console.log(res.leave('Avenue', 3, 3));

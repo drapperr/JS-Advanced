@@ -4,7 +4,7 @@ var assert = require('chai').assert;
 describe('ChristmasMovies', ()=> {
     describe('Instantiation ', ()=> {
         it('no parameters, and properties ', ()=> {
-            let christmasMovies=new ChristmasMovies;
+            let christmasMovies=new ChristmasMovies();
             assert.deepEqual(christmasMovies.movieCollection,[]);
             assert.deepEqual(christmasMovies.watched,{});
             assert.deepEqual(christmasMovies.actors,[]);
@@ -17,7 +17,7 @@ describe('ChristmasMovies', ()=> {
 
             let expected=`You just got Home Alone to your collection in which Macaulay Culkin, Joe Pesci, Daniel Stern are taking part!`;
 
-            assert.equal(christmasMovies.buyMovie('Home Alone', ['Macaulay Culkin', 'Joe Pesci', 'Daniel Stern']),expected);
+            assert.equal(christmasMovies.buyMovie('Home Alone', ['Macaulay Culkin', 'Joe Pesci','Joe Pesci', 'Daniel Stern']),expected);
 
             assert.deepEqual(christmasMovies.movieCollection, [{ name: 'Home Alone', actors: ['Macaulay Culkin', 'Joe Pesci', 'Daniel Stern'] }]);
 
